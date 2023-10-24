@@ -19,7 +19,9 @@ Verificar si se ha instalado Git
 ```
 C:\Windows\system32>git --version
 ```
-*Configurar Git*, setear nombre y email
+**Configurar Git** 
+
+Setear nombre y email
 ```
 C:\Windows\system32> git config --global user.email "doctorX@gmail.com"
 C:\Windows\system32> git config --global user.name "Doctor"
@@ -28,6 +30,8 @@ Revisar la configuración
 ```
 C:\windows\system32>git config --list
 ```
+**Creación de repositorio local**
+
 Crear una carpeta en C:\ e *inicializarla*
 ```
 C:\Maestria\1mer-repo>git init
