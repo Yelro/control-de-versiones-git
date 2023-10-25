@@ -74,15 +74,130 @@ C:\Maestria\1mer-repo>git diff
 ```
 ![](https://i.stack.imgur.com/UXV2a.png)
 
-**add .** agrega todos los cambios
+**git add .** agrega todos los cambios
 ```
 C:\Maestria\1mer-repo>git add .
 ```
-**commit**
+**git commit**
 ```
 C:\Maestria\1mer-repo>git commit -m "agregar index2.js"
 ``` 
+## TRABAJO EN EQUIPO CON GIT
+* **Branches** o **ramas**: Lineas de desarrollo independientes. Rama main o master
 
+* **git branch** permite crear una rama nueva
 
+* **git checkout** permite desplazarte entre las ramas creadas por git branch
+
+* **git checkout** acepta el argumento **-b**, que creará la nueva rama y cambiará a ella al instante
+
+* **git merge** se utiliza para combinar dos ramas
+
+* **conflictos** de fusión suceden cuando fusionas ramas que tienen confirmaciones de cambios contrapuestas
+
+Ejemplo **git merge**
+
+![](https://i.stack.imgur.com/5G6Qz.png)
+
+Se crea un nuevo **branch**
+```
+C:\Maestria\1mer-repo>git checkout -b Orley/Tarea1-Multiplicacion
+``` 
+En index.js se crea la función multiply 
+
+**git add** y **git commit**
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar Multiplicacion"
+```
+**HEAD**: Puntero de Git para especificar branch/commit actual
+
+**git log**
+
+![](https://i.stack.imgur.com/e0gyf.png)
+
+Se cambia al **branch master** (main)
+```
+C:\Maestria\1mer-repo>git checkout master
+```
+Se crea un nuevo **branch** que realice otra tarea
+```
+C:\Maestria\1mer-repo>git checkout -b Desarrollador2-Dividir
+``` 
+En index.js se crea la función divide
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar Division"
+```
+Con **git log** vemos que esta rama contiene el commit de División, y los 2 commits de **master**
+
+![](https://i.stack.imgur.com/MLoBA.png)
+
+Cambiar al **branch master** (main)
+
+```
+C:\Maestria\1mer-repo>git checkout master
+```
+**git branch** permite ver las branchs que tenemos
+
+```
+C:\Maestria\1mer-repo>git branch
+```
+![](https://i.stack.imgur.com/3h4dr.png)
+
+Ahora con **git merge** se unirá un branch dentro de otro. 
+Unir el **branch mater** con la **branch Orley/Tarea1-Multiplicacion**
+
+```
+C:\Maestria\1mer-repo>git merge Orley/Tarea1-Multiplicacion
+```
+
+Con **git log** apreciamos como el *commit de Agregar Multiplicacion* se ha unido a **master**
+
+![](https://i.stack.imgur.com/ZF8Ua.png)
+
+Ahora se unirá **branch mater** con **branch  Desarrollador2-Dividir**
+
+```
+C:\Maestria\1mer-repo>git merge Desarrollador2-Dividir
+```
+![](https://i.stack.imgur.com/qM5ZE.png)
+
+**Nota**: se produce un **conflicto** en index.js porque 2 desarrolladores han tocado las mismas líneas de código y no puede unir automáticamente
+
+En **VS CODE** se *muestra el conflicto*, que se *soluciona* cerrando con corchete la función multiply y haciendo un espacio entre funciones
+
+![](https://i.stack.imgur.com/rhFg5.png)
+
+**git add**
+
+```
+C:\Maestria\1mer-repo>git add index.js
+```
+**git commit** para mostrar el Editor de Texto
+```
+C:\Maestria\1mer-repo>git commit
+```
+#### Editor de Texto
+* **i** - permite insertar
+* **Esc** - pasa a guardar y cerrar
+
+**Guardar y cerrar**
+
+* **:w** – Permite guardar el fichero
+* **:q** – Salir. Si el fichero ha sido modificado pero no se ha guardado, nos advertirá y no podremos salir usando este comando
+* **:q!** – Salir, descartando posibles cambios no guardados que se hayan realizado en el fichero
+* **:wq** – Hace el guardado del archivo y después sale
+
+No insertar nada solo **guardar y salir** (Esc->:wq_)
+
+![](https://i.stack.imgur.com/jRC8L.png)
+
+Con **git log** se aprecia que el **conflicto** se ha solucionado, y el *commit de Agregar División* se ha unido a **master**
+
+![](https://i.stack.imgur.com/UdxQG.png)
 
 
