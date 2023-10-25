@@ -38,13 +38,13 @@ C:\Maestria\1mer-repo>git init
 ```
 En *Visual Studio CODE*, se crea un archivo con una función
 
-![](https://i.stack.imgur.com/y9KUV.png)
+![](https://i.stack.imgur.com/axZqQ.png)
 
 **git status** permite obtener un reporte
 ```
 C:\Maestria\1mer-repo>git status
 ```
-![](https://i.stack.imgur.com/rNEcQ.png)
+![](https://i.stack.imgur.com/siR6E.png)
 
 **git add** añade una modificación presente en el directorio de trabajo
 
@@ -52,7 +52,7 @@ C:\Maestria\1mer-repo>git status
 C:\Maestria\1mer-repo>git add index.js
 C:\Maestria\1mer-repo>git status
 ```
-![](https://i.stack.imgur.com/C78iD.png)
+![](https://i.stack.imgur.com/oO1Cr.png)
 
 **git commit** permite documentar los cambios que se realizan en un repositorio
 
@@ -63,7 +63,7 @@ C:\Maestria\1mer-repo>git commit -m "1mer commit"
 ```
 C:\Maestria\1mer-repo>git log
 ```
-![](https://i.stack.imgur.com/RaCaB.png)
+![](https://i.stack.imgur.com/W1f1u.png)
 
 Se crea un archivo index2.js con la función concatenateStrings y en index.js se agrega la función subtract
 
@@ -72,7 +72,7 @@ Se crea un archivo index2.js con la función concatenateStrings y en index.js se
 ```
 C:\Maestria\1mer-repo>git diff
 ```
-![](https://i.stack.imgur.com/UXV2a.png)
+![](https://i.stack.imgur.com/OWTfK.png)
 
 **git add .** agrega todos los cambios
 ```
@@ -97,7 +97,7 @@ C:\Maestria\1mer-repo>git commit -m "agregar index2.js"
 
 Ejemplo **git merge**
 
-![](https://i.stack.imgur.com/5G6Qz.png)
+![](https://i.stack.imgur.com/YoTXH.png)
 
 Se crea un nuevo **branch**
 ```
@@ -114,7 +114,7 @@ C:\Maestria\1mer-repo>git commit -m "Agregar Multiplicacion"
 
 **git log**
 
-![](https://i.stack.imgur.com/e0gyf.png)
+![](https://i.stack.imgur.com/1qSs9.png)
 
 Se cambia al **branch master** (main)
 ```
@@ -134,7 +134,7 @@ C:\Maestria\1mer-repo>git commit -m "Agregar Division"
 ```
 Con **git log** vemos que esta rama contiene el commit de División, y los 2 commits de **master**
 
-![](https://i.stack.imgur.com/MLoBA.png)
+![](https://i.stack.imgur.com/O76EN.png)
 
 Cambiar al **branch master** (main)
 
@@ -199,5 +199,41 @@ No insertar nada solo **guardar y salir** (**Esc**->**:wq**)
 Con **git log** se aprecia que el **conflicto** se ha solucionado, y el *commit de Agregar División* se ha unido a **master**
 
 ![](https://i.stack.imgur.com/UdxQG.png)
+
+### Etiquetas y versionado semántico
+
+**Etiquetas** (tags) son punteros fijos a un commit en especial
+* git tag nombre
+* git tag (lista)
+* git tag -d nombre
+
+**Versionado semántico** es una convención en la nomenclatura para nombrar
+versiones. X.Y.Z.
+* X: Cambios mayores: API, modificaciones importantes
+* Y: Se agregan nuevas características, retrocompatibles con versiones anteriores
+* Z: Cambios menores: bug fixes, parches
+
+Con **git checkout** y el **ID de un commit** en particular, permite desplazarse a él, en este caso se usa el commit de “agregar index2.js”
+
+```
+C:\Maestria\1mer-repo>git checkout 4d6c5eb76025493013850f7fd2d8b49969b3e376
+```
+
+En este Commit agregaremos un **git tag**, le pondremos de versión 0.0.1
+
+```
+C:\Maestria\1mer-repo>git tag 0.0.1
+```
+En **git log** se ve la etiqueta añadida
+
+![](https://i.stack.imgur.com/s5Xqd.png)
+
+**git checkout master** volvemos a la **branch mater**
+
+```
+C:\Maestria\1mer-repo>git checkout master
+```
+
+
 
 
