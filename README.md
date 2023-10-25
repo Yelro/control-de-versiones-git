@@ -146,7 +146,7 @@ C:\Maestria\1mer-repo>git checkout master
 ```
 C:\Maestria\1mer-repo>git branch
 ```
-![](https://i.stack.imgur.com/3h4dr.png)
+![](https://i.stack.imgur.com/LvFFJ.png)
 
 Ahora con **git merge** se unirá un branch dentro de otro. 
 Unir el **branch mater** con la **branch Orley/Tarea1-Multiplicacion**
@@ -157,20 +157,20 @@ C:\Maestria\1mer-repo>git merge Orley/Tarea1-Multiplicacion
 
 Con **git log** apreciamos como el *commit de Agregar Multiplicacion* se ha unido a **master**
 
-![](https://i.stack.imgur.com/ZF8Ua.png)
+![](https://i.stack.imgur.com/GHyzW.png)
 
 Ahora se unirá **branch mater** con **branch  Desarrollador2-Dividir**
 
 ```
 C:\Maestria\1mer-repo>git merge Desarrollador2-Dividir
 ```
-![](https://i.stack.imgur.com/qM5ZE.png)
+![](https://i.stack.imgur.com/RGG8h.png)
 
 **Nota**: se produce un **conflicto** en index.js porque 2 desarrolladores han tocado las mismas líneas de código y no puede unir automáticamente
 
 En **VS CODE** se *muestra el conflicto*, que se *soluciona* cerrando con corchete la función multiply y haciendo un espacio entre funciones
 
-![](https://i.stack.imgur.com/rhFg5.png)
+![](https://i.stack.imgur.com/6IOex.png)
 
 **git add**
 
@@ -194,11 +194,11 @@ C:\Maestria\1mer-repo>git commit
 
 No insertar nada solo **guardar y salir** (**Esc**->**:wq**)
 
-![](https://i.stack.imgur.com/jRC8L.png)
+![](https://i.stack.imgur.com/NGT1u.png)
 
 Con **git log** se aprecia que el **conflicto** se ha solucionado, y el *commit de Agregar División* se ha unido a **master**
 
-![](https://i.stack.imgur.com/UdxQG.png)
+![](https://i.stack.imgur.com/oWdqY.png)
 
 ### Etiquetas y versionado semántico
 
@@ -226,14 +226,118 @@ C:\Maestria\1mer-repo>git tag 0.0.1
 ```
 En **git log** se ve la etiqueta añadida
 
-![](https://i.stack.imgur.com/s5Xqd.png)
+![](https://i.stack.imgur.com/kMBjo.png)
 
 Se cambia al **branch master** (main)
 
 ```
 C:\Maestria\1mer-repo>git checkout master
 ```
+### Gitignore y gestión de archivos binarios y sensibles
 
+* .gitignore es in archivo de texto plano con patrones para ignorar archivos
+* Builds, archivos para subir, archivos sensibles con contraseñas, logs
 
+![](https://i.stack.imgur.com/VMdsN.png)
+
+En VS CODE crearemos el archivo .gitignore
+
+![](https://i.stack.imgur.com/rqary.png)
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar gitignore"
+
+```
+Además, en VS CODE creamos una **carpeta**: **logs**, con un **archivo**: **sabado21.log**, y fuera de la carpeta creamos también un **archivos**: **secrets.yml**
+
+Posteriormente en el archivo **.gitgnore** le coloco **/logs** que ignora cualquier cosa dentro de la carpeta, y **secrets,yml** que ignorara este archivo 
+
+![](https://i.stack.imgur.com/1Z7Z1.png)
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar longs y secrets a gitgnore"
+
+```
+### Hooks de Git y automatización de tareas
+* Hooks son scripts que se ejecutan en respuesta a acciones en un repositorio git: antes de commit, antes de push
+* Se encuentran en .git/hooks
+
+Con **dir** y el modificador **/a:h** comprobamos si existe la carpeta oculta .git/hooks (Linux = **ls -la**)
+
+```
+C:\Maestria\1mer-repo>dir /a:h
+```
+![](https://i.stack.imgur.com/xE6Nl.png)
+
+Se ingresa en la carpeta hooks **cd .git/hooks** y con **dir** nos muestra el directorio
+
+```
+C:\Maestria\1mer-repo>cd .git/hooks
+C:\Maestria\1mer-repo\.git\hooks>dir
+```
+![](https://i.stack.imgur.com/90wO0.png)
+
+Abrir el archivo ****pre-commit.sample**
+
+```
+C:\Maestria\1mer-repo\.git\hooks>more pre-commit.sample
+```
+![](https://i.stack.imgur.com/78WeA.png)
+
+Se copia (**copy**) el pre-commit.sample al archivo pre-commit (Linux copiar = cp)
+
+```
+C:\Maestria\1mer-repo\.git\hooks>copy pre-commit.sample pre-commit
+```
+Volver a la carpeta **1mer-repo**
+
+En **index2.js** se crea la función **toUpperCase**
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar toUpperCase"
+```
+Volvemos a la carpeta hooks **cd .git/hooks** y con **dir** nos muestra el archivo **pre-commit** recién creado
+
+Se abre el *archivo pre-commit* en el **Editor de Texto vim**
+
+```
+C:\Maestria\1mer-repo\.git\hooks>vim pre-commit    
+```
+Si *no se reconoce el comando*, se puede **descargar el Editos de Text Vim** y *editarlo directamente* en él (en Linux no suele haber problemas con ello)
+
+[link de descarga](https://github.com/vim/vim-win32-installer/releases)
+
+Presionar **i** para *insertar la salida*: **echo “vamos a hacer un commit”** ->**Esc**->**:wq**
+
+![](https://i.stack.imgur.com/YKprN.png)
+
+Volver a la carpeta **1mer-repo**
+
+En VS CODE al archivo index2.js se *agrega la función* **getFirstCharacter**
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar traer primer caracter"
+```
+Se observa el *mensaje* del pre-commit *"vamos a hacer un commit"* antes de la acción de ejecutarse el commit de "Agregar traer primer caracter"
+
+![](https://i.stack.imgur.com/vhZKL.png)
+
+Si se agrega **-n** al final del commit *no se ejecutan los hooks* (el mensaje de pre-commit)
+
+```
+C:\Maestria\1mer-repo>git commit -m "Agregar traer primer caracter" -n
+```
 
 
