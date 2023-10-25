@@ -228,7 +228,7 @@ En **git log** se ve la etiqueta añadida
 
 ![](https://i.stack.imgur.com/s5Xqd.png)
 
-**git checkout master** volvemos a la **branch mater**
+Se cambia al **branch master** (main)
 
 ```
 C:\Maestria\1mer-repo>git checkout master
