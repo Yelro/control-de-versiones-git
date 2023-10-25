@@ -192,7 +192,7 @@ C:\Maestria\1mer-repo>git commit
 * **:q!** – Salir, descartando posibles cambios no guardados que se hayan realizado en el fichero
 * **:wq** – Hace el guardado del archivo y después sale
 
-No insertar nada solo **guardar y salir** (Esc->:wq_)
+No insertar nada solo **guardar y salir** (**Esc**->**:wq**)
 
 ![](https://i.stack.imgur.com/jRC8L.png)
 
