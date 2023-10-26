@@ -242,7 +242,7 @@ C:\Maestria\1mer-repo>git checkout master
 
 En VS CODE crearemos el archivo .gitignore
 
-![](https://i.stack.imgur.com/rqary.png)
+![](https://i.stack.imgur.com/PX772.png)
 
 **git add** y **git commit**
 
@@ -255,7 +255,7 @@ Además, en VS CODE creamos una **carpeta**: **logs**, con un **archivo**: **sab
 
 Posteriormente en el archivo **.gitgnore** le coloco **/logs** que ignora cualquier cosa dentro de la carpeta, y **secrets,yml** que ignorara este archivo 
 
-![](https://i.stack.imgur.com/1Z7Z1.png)
+![](https://i.stack.imgur.com/JlKhP.png)
 
 **git add** y **git commit**
 
@@ -273,7 +273,7 @@ Con **dir** y el modificador **/a:h** comprobamos si existe la carpeta oculta .g
 ```
 C:\Maestria\1mer-repo>dir /a:h
 ```
-![](https://i.stack.imgur.com/xE6Nl.png)
+![](https://i.stack.imgur.com/3D1Fi.png)
 
 Se ingresa en la carpeta hooks **cd .git/hooks** y con **dir** nos muestra el directorio
 
@@ -281,14 +281,14 @@ Se ingresa en la carpeta hooks **cd .git/hooks** y con **dir** nos muestra el di
 C:\Maestria\1mer-repo>cd .git/hooks
 C:\Maestria\1mer-repo\.git\hooks>dir
 ```
-![](https://i.stack.imgur.com/90wO0.png)
+![](https://i.stack.imgur.com/OU5l5.png)
 
 Abrir el archivo ****pre-commit.sample**
 
 ```
 C:\Maestria\1mer-repo\.git\hooks>more pre-commit.sample
 ```
-![](https://i.stack.imgur.com/78WeA.png)
+![](https://i.stack.imgur.com/7BE0V.png)
 
 Se copia (**copy**) el pre-commit.sample al archivo pre-commit (Linux copiar = cp)
 
@@ -307,7 +307,7 @@ C:\Maestria\1mer-repo>git commit -m "Agregar toUpperCase"
 ```
 Volvemos a la carpeta hooks **cd .git/hooks** y con **dir** nos muestra el archivo **pre-commit** recién creado
 
-Se abre el *archivo pre-commit* en el **Editor de Texto vim**
+Se abre el *archivo pre-commit* en el **Editor de Texto Vim**
 
 ```
 C:\Maestria\1mer-repo\.git\hooks>vim pre-commit    
@@ -318,7 +318,7 @@ Si *no se reconoce el comando*, se puede **descargar el Editos de Text Vim** y *
 
 Presionar **i** para *insertar la salida*: **echo “vamos a hacer un commit”** ->**Esc**->**:wq**
 
-![](https://i.stack.imgur.com/YKprN.png)
+![](https://i.stack.imgur.com/YLbhg.png)
 
 Volver a la carpeta **1mer-repo**
 
@@ -332,12 +332,205 @@ C:\Maestria\1mer-repo>git commit -m "Agregar traer primer caracter"
 ```
 Se observa el *mensaje* del pre-commit *"vamos a hacer un commit"* antes de la acción de ejecutarse el commit de "Agregar traer primer caracter"
 
-![](https://i.stack.imgur.com/vhZKL.png)
+![](https://i.stack.imgur.com/qoEp3.png)
 
 Si se agrega **-n** al final del commit *no se ejecutan los hooks* (el mensaje de pre-commit)
 
 ```
 C:\Maestria\1mer-repo>git commit -m "Agregar traer primer caracter" -n
 ```
+## Git Avanzado
+
+### Git Rebase
+* git rebase sirve para reorganizar y modificar la historia del proyecto.
+* A diferencia de merge, se puede modificar el historial
+* git rebase
+* git rebase -i HEAD~n
+* git rebase -i branch
+
+![](https://i.stack.imgur.com/yo5Ez.png)
+
+Se crea el branch orley/tarea-2-get-char
+
+```
+C:\Maestria\1mer-repo>git checkout -b orley/tarea-2-get-char
+```
+En VS CODE se crea la función getOneCharacter en index2.js
+
+**git add** y **git commit**
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit –m “Agregar traer un caracter”
+
+```
+Se cambia al **branch main** (master)
+```
+C:\Maestria\1mer-repo>git checkout main
+```
+Crear **función power** en index.js 
+
+**git add** y **git commit**
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar potencia"
+```
+Se cambia al **branch orley/tarea-2-get-char**
+```
+C:\Maestria\1mer-repo>git checkout orley/tarea-2-get-char
+```
+Con **git log** vemos, que *no tiene el commit de “Agregar potencia”* porque se izó luego de crear la rama
+
+![](https://i.stack.imgur.com/41VRq.png)
+
+Estando en la *branch* de **orley/tarea-2-get-char**, hacer **rebase**, sé lo hace contra la *branch* **main** (master) que se desea actualizar
+
+```
+C:\Maestria\1mer-repo>git rebase main
+```
+Con **git log**, vemos la actualización realizada
+
+![](https://i.stack.imgur.com/faeQ9.png)
+
+En index2.js se crea la función getTwoCharacter
+
+**git add** y **git commit**
+
+```
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar traer 2 caracteres"
+```
+Se crea nuevamente en index2.js la función makeCapitalized
+```
+**git add** y **git commit**
+
+C:\Maestria\1mer-repo>git add .
+C:\Maestria\1mer-repo>git commit -m "Agregar hacer capitalizado"
+```
+![](https://i.stack.imgur.com/eMIIM.png)
+
+Hacer **git rebase -i** contra el *ID del commit “Agregar potencia”* de main, para que el Editor de Texto muestre los 3 últimos commit
+
+```
+C:\Maestria\1mer-repo>git rebase -i 590a6829c22eb1e59652b5c030f45fde06ea78b3
+```
+También se puede obtener el mismo resultado con **git rebase -i HEAD~n** colocando el *número de commit* que se desea
+```
+C:\Maestria\1mer-repo>git rebase -i HEAD~3
+```
+**Nota**: cada uno de estos comandos se pueden usar para realizar diferentes acciones
+
+![](https://i.stack.imgur.com/P0C8A.png)
+
+Presionar **i** para *insertar* **r** -> **Esc** -> **:wq**
+
+Se *cambia la descripción* de un commit con la letra **r**
+En este caso se cambiará: "Agregar traer **2** caracteres" por "Agregar traer **dos** caracteres"  
+
+![](https://i.stack.imgur.com/esOcu.png)
+
+Presionar **i** para *insertar* **dos** -> **Esc** -> **:wq**
+
+Nos lleva al commit seleccionado y se procede a cambiar la descripción: 2-dos
+
+![](https://i.stack.imgur.com/rPPoT.png)
+
+Con **git log**, se aprecia que el commit ya está modificado
+
+![](https://i.stack.imgur.com/bWEbB.png)
+
+### Git stash
+
+Es una estructura de datos en pila, lo que hace es guardar los cambios temporales o no definitivos sin necesidad de hacer commit 
+* git stash
+* git stash pop
+* git stash list
+* git stash apply stash@{n}
+* git stash pop stash@{n}
+
+En VS CODE, en index2.js se realiza la **función getInitials3** y se la *deja incompleta* 
+
+![](https://i.stack.imgur.com/hsJQF.png)
+
+Se me pide que cambie a la **branch main** (master), y para no llevar esos cambios se los *guarda en una pila temporal* **git stash**, donde guarda temporalmente, pero deja la branch tal como estaba
+
+```
+C:\Maestria\1mer-repo>git stash
+```
+Si vamos a **git status** *no hay ninguna función*, pero lo *podemos ver dentro de la* **pila**
+
+Donde lo guarda en la posición 0, y lo saco del commit “funcione con strings” el cual es un trabajo en progreso (WIP)
+
+```
+C:\Maestria\1mer-repo>git stash list
+```
+![](https://i.stack.imgur.com/6sHWo.png)
+
+Si hacemos **git stash pop** me trae y borra los últimos cambios que están dentro de la pila
+
+Es decir, *retorna* la **función getInitials3** incompleta, pero lo borra de la pila
+```
+C:\Maestria\1mer-repo>git stash pop
+```
+![](https://i.stack.imgur.com/gxAnv.png)
+
+Volver hacer **git stash**
+
+```
+C:\Maestria\1mer-repo>git stash
+```
+Con **git stash list** se aprecia que la posición del stash, en este caso 0
+
+**git stash apply stash@{n}** aplica el número del cambio que queramos, pero no lo borra
+
+```
+C:\Maestria\1mer-repo>git stash apply stash@{0}
+```
+**git stash pop stash@{n}** elimina algo de la pila
+```
+C:\Maestria\1mer-repo>git stash pop stash@{0}
+```
+**git checkout -- .** una forma de eliminar los cambios de forma definitiva
+
+```
+C:\Maestria\1mer-repo>git checkout -- .
+```
+Con **git status** se ve que ya no hay nada
+
+![](https://i.stack.imgur.com/rSxyO.png)
+
+Pero como se aplicó **git stash apply stash@{n}** aún se conserva en la lista
+
+![](https://i.stack.imgur.com/Sz3TE.png)
+
+Pero si hago **git stash pop** que lo saca y lo borra, me quedo sin nada en la lista, no hay forma de recuperarlo por CMD
+
+```
+C:\Maestria\1mer-repo>git stash pop
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
