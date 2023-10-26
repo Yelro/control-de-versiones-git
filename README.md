@@ -507,6 +507,56 @@ Pero si hago **git stash pop** que lo saca y lo borra, me quedo sin nada en la l
 ```
 C:\Maestria\1mer-repo>git stash pop
 ```
+### Recuperación de cambios eliminados: cherry-pick, revert
+
+**Cherry pick** permite seleccionar un commit en específico y aplicarlo en otra rama
+* git cherry-pick <commit>
+
+**Revert** deshace los cambios que realizó un commit y aplicarlos. Mantiene un commit de revert, lo que lo hace visible en el log
+* git revert <commit>
+
+**NOTA**: git chery-pick lo que hará es copiar ese commit y pegarlo en cualquier otra rama, siempre y cuando teniendo la certeza que nunca se va a hacer merge, porque el merge va a detectar que ese commit ya existe y dará conflictos
+
+Hacer **git cherry-pick** con el ID del commit
+
+```
+C:\Maestria\1mer-repo>git cherry-pick e98191e05607365a717930291ad415fac4516090
+```
+En  **git log** se observa que ahora main tiene el commit "Agregar redondear" copiado
+
+![](https://i.stack.imgur.com/3CWXo.png)
+
+En **git revert** se copia el ID del commit "Agregar redondear" a revertir
+
+Lo que hace que se revierta el cambio del que no se está conforme
+
+```
+C:\Maestria\1mer-repo>git revert 3be7c2ed3a3dc7e54698515e8b6ad7db7109bfa6
+```
+Aparece el *Editor de Texto*, el cual dice que va a revertir el commit y solo se procede a guardar (Esc -> :wq)
+
+Con **git log** se ve que se ha agregado un commit de la reversión (este commit es la constancia que *“Agregar redondear”* ya no está, *fue revertido*)
+
+![](https://i.stack.imgur.com/gv6o0.png)
+
+Si desea recuperar el commit borrado se aplica un **revert** del **revert** 
+
+Para ello se copia el ID del commit de reversión, para hacer **git revert**
+
+```
+C:\Maestria\1mer-repo>git revert 565f3d0b0d90d92c43d005874b3466951e7e5666
+```
+En el Editor de Texto se muestra el **Revert** del **Revert**, no hace nada, solo se guarda
+
+En **git log** se aprecia que se tiene el commit revert de revert
+
+![](https://i.stack.imgur.com/EDZlb.png)
+
+En VS Code también se tiene la función redondear restaurada
+
+![](https://i.stack.imgur.com/zrMTN.png)
+
+
 
 
 
